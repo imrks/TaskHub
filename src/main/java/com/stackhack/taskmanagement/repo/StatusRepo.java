@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.stackhack.taskmanagement.entity.Status;
 
 
-public interface StatusRepo extends JpaRepository<Status, Integer> {
+public interface StatusRepo extends JpaRepository<Status, Long> {
 
 }

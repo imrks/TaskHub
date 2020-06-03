@@ -15,7 +15,7 @@ import java.util.Date;
 public class Tasks {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NotEmpty(message="Task Desc should not be empty")
 	@Column(name = "task_desc")
@@ -42,7 +42,7 @@ public class Tasks {
 	@ManyToOne
 	Customer customer;
 	
-	public Tasks(long id, @NotEmpty(message = "Task Desc should not be empty") String task_desc, Date date,
+	public Tasks(Long id, @NotEmpty(message = "Task Desc should not be empty") String task_desc, Date date,
 			Date dueDate, boolean archiveStatus, boolean overdueStatus, Status status, Label label,
 			Customer customer) {
 		super();
@@ -57,11 +57,11 @@ public class Tasks {
 		this.customer = customer;
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

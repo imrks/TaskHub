@@ -2,8 +2,9 @@ package com.stackhack.taskmanagement.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import aj.org.objectweb.asm.Label;
+import com.stackhack.taskmanagement.entity.Label;
 
-public interface LabelRepo extends JpaRepository<Label, Integer> {
+
+public interface LabelRepo extends JpaRepository<Label, Long> {
 
 }

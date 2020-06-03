@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.stackhack.taskmanagement.entity.Tasks;
 
-public interface TasksRepo extends JpaRepository<Tasks, Integer> {
+public interface TasksRepo extends JpaRepository<Tasks, Long> {
 
 }

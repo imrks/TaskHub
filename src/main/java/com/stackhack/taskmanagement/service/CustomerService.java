@@ -10,6 +10,7 @@ import com.stackhack.taskmanagement.repo.CustomerRepo;
 public class CustomerService {
 
 	@Autowired
+
 	CustomerRepo custRepo;
 	public void signUp(Customer customer) {
 		try {
@@ -18,5 +19,6 @@ public class CustomerService {
 		catch (Exception e){
 			return;
 		}
+
 	}
 }

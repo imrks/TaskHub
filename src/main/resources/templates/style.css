@@ -31,3 +31,8 @@ footer{
 #nav_blank{
  padding-top:100px;                
 } 
+
+
+form .error {
+  color: #ff0000;
+}

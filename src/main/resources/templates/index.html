@@ -8,13 +8,14 @@ and open the template in the editor.
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <!--jQuery library--> 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <!--Latest compiled and minified JavaScript--> 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
              <meta name="viewport" content="width=device-width, initial-scale=1.0">
              <title>Task Management</title>
              <link rel="stylesheet" type="text/css" href="style.css">
+			 <script src="indexPage.js"></script>
     </head>
     <body>
          <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -53,19 +54,19 @@ and open the template in the editor.
 					<div class="text-warning">
 						<h2>SIGN UP</h2>
 					</div>
-					<form>
+					<form action="#" name="registration" method="post">
 						<div class="form-group">
-							<input type="text"  class="form-control" name="name"  placeholder="Name" >
+							<input type="text"  class="form-control" name="name" id="name"  placeholder="Name" >
 						</div>
 						<div class="form-group">
-							<input type="text"  class="form-control" name="email" placeholder="Email">
+							<input type="text"  class="form-control" name="email" id="email" placeholder="Email">
 						</div>
 							<div class="form-group">
-							<input type="text"  class="form-control" name="password"  placeholder="Password" >
+							<input type="text"  class="form-control" name="password" id="password"  placeholder="Password" >
+							<center>
+							<button class="btn btn-primary" onclick="SignUp();">Sign Up</button>
+							</center>
 					</form>
-					<center>
-						<button class="btn btn-primary">SIGN UP</button>
-					</center>
 					</div>
 						</div>
 						<div class="modal-footer">

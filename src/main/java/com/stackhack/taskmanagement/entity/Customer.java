@@ -27,7 +27,7 @@ public class Customer {
 	@Column(name = "email")
 	private String email;
 	
-	@NotEmpty(message="Email should not be empty")
+	@NotEmpty(message="Password should not be empty")
 	@Column(name = "password")
 	@Size(min=6, message="Password should have atleast 6 characters")
 	private String password;

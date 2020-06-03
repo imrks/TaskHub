@@ -1,5 +1,10 @@
 package com.stackhack.taskmanagement.repo;
 
-public interface StatusRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.stackhack.taskmanagement.entity.Status;
+
+
+public interface StatusRepo extends JpaRepository<Status, Long> {
 
 }

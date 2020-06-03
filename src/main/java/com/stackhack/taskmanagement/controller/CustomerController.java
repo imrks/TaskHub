@@ -19,7 +19,7 @@ import com.stackhack.taskmanagement.service.CustomerService;
 
 
 
-@CrossOrigin
+@CrossOrigin(origins="*")
 @RestController
 public class CustomerController {
 	

@@ -13,23 +13,23 @@ import javax.validation.constraints.NotEmpty;
 public class Label {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	@NotEmpty(message="Label should not be empty")
 	@Column(name = "label")
 	private String label;
 	
-	public Label(Long id, @NotEmpty(message = "Label should not be empty") String label) {
+	public Label(long id, @NotEmpty(message = "Label should not be empty") String label) {
 		super();
 		this.id = id;
 		this.label = label;
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

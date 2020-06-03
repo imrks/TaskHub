@@ -10,11 +10,15 @@ import com.stackhack.taskmanagement.repo.CustomerRepo;
 public class CustomerService {
 
 	@Autowired
-	private CustomerRepo customerrepo;
-	
-	public void SignUp(Customer customer)
-	{
-		System.out.println(customer.getName());
-		customerrepo.save(customer);
+
+	CustomerRepo custRepo;
+	public void signUp(Customer customer) {
+		try {
+			custRepo.save(customer);
+		}
+		catch (Exception e){
+			return;
+		}
+
 	}
 }

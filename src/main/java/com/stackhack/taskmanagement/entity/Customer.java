@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	@NotEmpty(message="Name should not be empty")
 	@Size(min=2, message="Name should have atleast 2 characters")
@@ -32,7 +32,7 @@ public class Customer {
 	@Size(min=6, message="Password should have atleast 6 characters")
 	private String password;
 	
-	public Customer(Long id, String name, String email, String password) {
+	public Customer(long id, String name, String email, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -40,11 +40,11 @@ public class Customer {
 		this.password = password;
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

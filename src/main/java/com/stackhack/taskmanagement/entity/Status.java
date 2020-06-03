@@ -13,23 +13,23 @@ import javax.validation.constraints.NotEmpty;
 public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	@NotEmpty(message="Status should not be empty")
 	@Column(name = "status")
 	private String status;
 	
-	public Status(Long id, @NotEmpty(message = "Status should not be empty") String status) {
+	public Status(long id, @NotEmpty(message = "Status should not be empty") String status) {
 		super();
 		this.id = id;
 		this.status = status;
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

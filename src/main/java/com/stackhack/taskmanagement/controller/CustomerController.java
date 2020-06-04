@@ -54,14 +54,14 @@ public class CustomerController {
 		Customer cust = customerService.FindUserbyEmail(email);
 		if(cust == null)
 		{
-			Response notfound = new Response("email not found", 404);
-			return new ResponseEntity<Response>(notfound,HttpStatus.NOT_FOUND);
+			Response notfound = new Response("Email Not Found", 403);
+			return new ResponseEntity<Response>(notfound,HttpStatus.FORBIDDEN);
 		}
 		if(!cust.getPassword().equals(password))
 		{
-			Response notauth = new Response("password wrong", 404);
+			Response notauth = new Response("Wrong Password", 401);
 			customerService.Login(email, password);
-			return new ResponseEntity<Response>(notauth,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Response>(notauth,HttpStatus.UNAUTHORIZED);
 		}
 		else
 		{

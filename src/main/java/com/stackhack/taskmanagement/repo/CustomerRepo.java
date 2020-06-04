@@ -9,5 +9,5 @@ import com.stackhack.taskmanagement.entity.Customer;
 @Transactional
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
-public Customer findByEmail(String email);
+public Customer findCustomerByEmail(String email);
 }

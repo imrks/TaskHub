@@ -31,11 +31,9 @@ public class Customer {
 	@Column(name = "password")
 	@Size(min=6, message="Password should have atleast 6 characters")
 	private String password;
-	
 	public Customer() {
 		
 	}
-	
 	public Customer(long id, String name, String email, String password) {
 		super();
 		this.id = id;

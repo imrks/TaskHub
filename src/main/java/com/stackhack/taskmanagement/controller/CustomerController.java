@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,15 +71,15 @@ public class CustomerController {
 		if(!cust.getPassword().equals(password))
 		{
 			Response notauth = new Response("password wrong", 404);
-			customerService.Login(email, password);
+		
 			return new ResponseEntity<Response>(notauth,HttpStatus.NOT_FOUND);
 		}
 		else
 		{
 			
 			//Response success=new Response("Successfull",200);
-			List<Tasks> task =	customerService.Login(email, password);
-			return new ResponseEntity<List<Tasks>>(task, HttpStatus.OK);
+			
+			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
 		}
 		}
 		catch(Exception e)

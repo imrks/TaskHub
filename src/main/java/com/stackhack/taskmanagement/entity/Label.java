@@ -19,6 +19,10 @@ public class Label {
 	@Column(name = "label")
 	private String label;
 	
+	public Label() {
+		
+	}
+	
 	public Label(long id, @NotEmpty(message = "Label should not be empty") String label) {
 		super();
 		this.id = id;

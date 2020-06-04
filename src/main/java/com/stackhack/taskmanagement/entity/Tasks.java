@@ -41,6 +41,10 @@ public class Tasks {
 	
 	@ManyToOne
 	Customer customer;
+	public Tasks()
+	{
+		
+	}
 	
 	public Tasks(long id, @NotEmpty(message = "Task Desc should not be empty") String task_desc, Date date,
 			Date dueDate, boolean archiveStatus, boolean overdueStatus, Status status, Label label,

@@ -51,7 +51,22 @@ var url = 'http://localhost:8080/signup';
 request.open('POST', url);
 var data1 = JSON.stringify(data);
 request.setRequestHeader("Content-Type", "application/json");
-console.log(email);
 request.send(data1);
 
+}
+function Login()
+{
+  var email = document.getElementById("email1").value;
+var password = document.getElementById("password1").value;
+var data = {
+	
+	email: email,
+	password: password
+}
+var request = new XMLHttpRequest();
+var url = 'http://localhost:8080/'+email+'/'+password;
+request.open('POST', url);
+var data1 = JSON.stringify(data);
+request.setRequestHeader("Content-Type", "application/json");
+request.send(data1);
 }

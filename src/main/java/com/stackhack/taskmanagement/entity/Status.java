@@ -18,6 +18,10 @@ public class Status {
 	@NotEmpty(message="Status should not be empty")
 	@Column(name = "status")
 	private String status;
+	public Status()
+	{
+		
+	}
 	
 	public Status(long id, @NotEmpty(message = "Status should not be empty") String status) {
 		super();

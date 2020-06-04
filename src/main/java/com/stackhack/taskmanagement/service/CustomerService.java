@@ -21,9 +21,13 @@ public class CustomerService {
 	@Autowired
 	TasksRepo taskRepo;
 	
+	public Customer FindUserbyEmail(String email) {
+		// TODO Auto-generated method stub
+		return custRepo.findCustomerByEmail(email);
+	}
+	
 	public void signUp(Customer customer) {
 		try {
-			
 			custRepo.save(customer);
 		}
 		
@@ -35,7 +39,6 @@ public class CustomerService {
 	
 	public List<Tasks> Login(String email, String password) {
 		// TODO Auto-generated method stub
-		
 		try {
 			
 				Customer cust = custRepo.findCustomerByEmail(email);
@@ -46,24 +49,10 @@ public class CustomerService {
                 							.getId() == cust.getId())
                 							.collect(Collectors.toList());
                 return task1;
-				
-			
 			}
 			catch(Exception e)
 			{
 				throw new SignUpException("Failure");
 			}
-
 	}
-
-
-	public Customer FindUserbyEmail(String email) {
-		// TODO Auto-generated method stub
-		return custRepo.findCustomerByEmail(email);
-	}
-
-
-	
-	
-	
 }

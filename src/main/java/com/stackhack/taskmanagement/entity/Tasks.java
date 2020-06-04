@@ -41,8 +41,7 @@ public class Tasks {
 	
 	@ManyToOne
 	Customer customer;
-	public Tasks()
-	{
+	public Tasks() {
 		
 	}
 	

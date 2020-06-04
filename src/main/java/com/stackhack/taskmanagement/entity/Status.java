@@ -18,8 +18,7 @@ public class Status {
 	@NotEmpty(message="Status should not be empty")
 	@Column(name = "status")
 	private String status;
-	public Status()
-	{
+	public Status() {
 		
 	}
 	

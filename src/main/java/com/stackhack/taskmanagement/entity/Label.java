@@ -18,8 +18,7 @@ public class Label {
 	@NotEmpty(message="Label should not be empty")
 	@Column(name = "label")
 	private String label;
-	public Label()
-	{
+	public Label() {
 		
 	}
 	

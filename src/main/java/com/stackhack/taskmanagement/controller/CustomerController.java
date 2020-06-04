@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -46,26 +45,24 @@ public class CustomerController {
 			throw new SignUpException("Failure");
 		}
 	}
-	@RequestMapping(value="/login/{email}/{password}")
+	@RequestMapping(value="/login/{email}/{password}", method = RequestMethod.GET)
 	public ResponseEntity<?> LogIn(@PathVariable String email, @PathVariable String password)
 	{
 		try {
 		Customer cust = customerService.FindUserbyEmail(email);
 		if(cust == null)
 		{
-			Response notfound = new Response("email not found", 404);
-			return new ResponseEntity<Response>(notfound,HttpStatus.NOT_FOUND);
+			Response notfound = new Response("Email Not Found", 403);
+			return new ResponseEntity<Response>(notfound,HttpStatus.FORBIDDEN);
 		}
 		if(!cust.getPassword().equals(password))
 		{
-			Response notauth = new Response("password wrong", 404);
-		
-			return new ResponseEntity<Response>(notauth,HttpStatus.NOT_FOUND);
+			Response notauth = new Response("Wrong Password", 401);
+			return new ResponseEntity<Response>(notauth,HttpStatus.UNAUTHORIZED);
 		}
 		else
 		{
 			//Response success=new Response("Successfull",200);
-			
 			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
 		}
 		}

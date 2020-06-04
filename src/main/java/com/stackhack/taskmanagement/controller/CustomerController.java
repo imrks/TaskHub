@@ -45,7 +45,7 @@ public class CustomerController {
 			throw new SignUpException("Failure");
 		}
 	}
-	@RequestMapping(value="/login/{email}/{password}")
+	@RequestMapping(value="/login/{email}/{password}", method = RequestMethod.GET)
 	public ResponseEntity<?> LogIn(@PathVariable String email, @PathVariable String password)
 	{
 		try {
@@ -58,7 +58,6 @@ public class CustomerController {
 		if(!cust.getPassword().equals(password))
 		{
 			Response notauth = new Response("Wrong Password", 401);
-			customerService.Login(email, password);
 			return new ResponseEntity<Response>(notauth,HttpStatus.UNAUTHORIZED);
 		}
 		else

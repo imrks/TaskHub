@@ -1,7 +1,6 @@
 package com.stackhack.taskmanagement.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,18 +36,17 @@ public class CustomerService {
 	}
 	
 	
-	public List<Tasks> Login(String email, String password) {
+	public List<Tasks> myTaskLists(long cid) {
 		// TODO Auto-generated method stub
 		try {
 			
-				Customer cust = custRepo.findCustomerByEmail(email);
-				List<Tasks> task = taskRepo.findAll();
-                List<Tasks> task1 =	task
+				List<Tasks> task = taskRepo.findAllTaskByCustomer_id(cid);
+                /*List<Tasks> task1 =	task
                 							.stream()
                 							.filter(p->p.getCustomer()	
                 							.getId() == cust.getId())
-                							.collect(Collectors.toList());
-                return task1;
+                							.collect(Collectors.toList());*/
+                return task;
 			}
 			catch(Exception e)
 			{

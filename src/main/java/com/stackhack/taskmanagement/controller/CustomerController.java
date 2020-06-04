@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackhack.taskmanagement.entity.Customer;
-import com.stackhack.taskmanagement.entity.Tasks;
 import com.stackhack.taskmanagement.exception.SignUpException;
 import com.stackhack.taskmanagement.response.Response;
 import com.stackhack.taskmanagement.service.CustomerService;
@@ -66,8 +64,7 @@ public class CustomerController {
 		else
 		{
 			//Response success=new Response("Successfull",200);
-			List<Tasks> task =	customerService.Login(email, password);
-			return new ResponseEntity<List<Tasks>>(task, HttpStatus.OK);
+			return new ResponseEntity<Customer>(cust, HttpStatus.OK);
 		}
 		}
 		catch(Exception e)

@@ -26,6 +26,7 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerService customerService;
+	
 	@RequestMapping(value="/signup", method = RequestMethod.POST)
 	public ResponseEntity<?> signupDetails(@Valid @RequestBody Customer customer) {
 		try {

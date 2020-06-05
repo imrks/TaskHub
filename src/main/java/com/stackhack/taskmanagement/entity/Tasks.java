@@ -34,13 +34,13 @@ public class Tasks {
 	private boolean overdueStatus;
 	
 	@ManyToOne
-	Status status;
+	Status status = new Status();
 	
 	@ManyToOne
-	Label label;
+	Label label = new Label();
 	
 	@ManyToOne
-	Customer customer;
+	Customer customer = new Customer();
 	public Tasks() {
 		
 	}

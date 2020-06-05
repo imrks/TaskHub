@@ -6,5 +6,6 @@ import com.stackhack.taskmanagement.entity.Status;
 
 
 public interface StatusRepo extends JpaRepository<Status, Long> {
+	public Status findStatusById(long id);
 
 }

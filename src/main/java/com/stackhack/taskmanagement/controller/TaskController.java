@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stackhack.taskmanagement.entity.Label;
+import com.stackhack.taskmanagement.entity.Status;
 import com.stackhack.taskmanagement.entity.Tasks;
 import com.stackhack.taskmanagement.exception.SignUpException;
 import com.stackhack.taskmanagement.service.CustomerService;
@@ -56,5 +58,34 @@ public class TaskController {
 	{
 		customerService.EditTask(task,id);
 		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getlabel")
+	public ResponseEntity<?> GetLabel()
+	{
+		try {
+			
+		List<Label> label =	customerService.GetLabel();
+		return new ResponseEntity<List<Label>>(label, HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
+	}
+	
+	@RequestMapping(value="/getstatus")
+	public ResponseEntity<?> GetStatus()
+	{
+		try {
+			
+		List<Status> status =	customerService.GetStatus();
+		return new ResponseEntity<List<Status>>(status, HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
+	
 	}
 }

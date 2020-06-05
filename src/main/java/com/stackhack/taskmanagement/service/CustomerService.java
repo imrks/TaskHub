@@ -78,4 +78,13 @@ public class CustomerService {
 		
 		taskRepo.save(task1);
 	}
+
+	public List<Label> GetLabel() {
+		// TODO Auto-generated method stub
+		return labelRepo.findAll();
+	}
+	public List<Status> GetStatus()
+	{
+		return statusRepo.findAll();
+	}
 }

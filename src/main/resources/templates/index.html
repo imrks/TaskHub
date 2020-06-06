@@ -54,7 +54,7 @@ and open the template in the editor.
 					<div class="text-warning">
 						<h2>SIGN UP</h2>
 					</div>
-					<form id="signupForm" name="registration" method="post">
+					<form name="registration" method="POST">
 						<div class="form-group">
 							<input type="text"  class="form-control" name="name" id="name"  placeholder="Name" >
 						</div>
@@ -67,8 +67,8 @@ and open the template in the editor.
 					</form>
 					<div id="signupmessage"></div>
 					<center>
-						<button class="btn btn-primary" onclick="SignUp()">Sign Up</button>
-						</center>
+						<button id="signupbtn" disabled="true" class="btn btn-primary" onclick="SignUp()">Sign Up</button>
+					</center>
 					</div>
 						</div>
 						<div class="modal-footer">
@@ -92,15 +92,17 @@ and open the template in the editor.
 					<div class="text-warning">
 						<h2>Login</h2>
 					</div>
-					<form id="loginForm">
+					<form name="loginForm" method="POST">
 						<div class="form-group">
-							<input type="text"  class="form-control" name="loginemail" placeholder="Email">
+							<input type="email"  class="form-control" name="loginemail" id="loginemail" placeholder="Email">
 						</div>
 							<div class="form-group">
-							<input type="text"  class="form-control" name="loginpassword"  placeholder="Password" >
+							<input type="password"  class="form-control" name="loginpassword" id="loginpassword"  placeholder="Password" >
+							</div>
 					</form>
+					<div id="loginmessage"></div>
 					<center>
-						<button class="btn btn-primary">Login</button>
+						<button id="loginbtn" disabled="true" class="btn btn-primary" onclick="Login()">Login</button>
 					</center>
 					</div>
 						</div>
@@ -120,7 +122,7 @@ and open the template in the editor.
         <footer style="position:fixed">
             <div class="container">
                 <center>
-                    <p>Copyright © Task Management. All Rights
+                    <p>Copyright Â© Task Management. All Rights
 Reserved | Contact Us: +91 90000 00000</p>
                 </center>
             </div>

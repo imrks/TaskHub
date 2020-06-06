@@ -27,11 +27,36 @@ request.onload = function () {
 request.send(data1);
 }
 
+function Login()
+{ 
+var loginrequest = new XMLHttpRequest();
+var loginemail = document.getElementById("loginemail").value;
+var loginpassword = document.getElementById("loginpassword").value;
+var url = 'http://localhost:8080/login/'+loginemail+'/'+loginpassword;
+loginrequest.open('GET', url);
+loginrequest.onload = function () {
+  if(loginrequest.status==200){
+    document.getElementById("loginmessage").innerHTML='<p style="color:green;text-align:center;">Logged In Successfully<\p>';
+    var id=JSON.parse(loginrequest.responseText).id;
+    localStorage.setItem("gid",id);
+    setTimeout(function(){window.location="mylist.html";},1000)
+  }
+  else if(loginrequest.status==403){
+    document.getElementById("loginmessage").innerHTML='<p style="color:red;text-align:center;">Email Not Found<\p>';
+  }
+  else if(loginrequest.status==401){
+    document.getElementById("loginmessage").innerHTML='<p style="color:red;text-align:center;">Wrong Password<\p>';
+  }
+  else{
+    document.getElementById("loginmessage").innerHTML='<p style="color:red;text-align:center;">Something went wrong<\p>';
+  }
+};
+loginrequest.send();
+}
+
+
 $(function() {
-  // Initialize form validation on the registration form.
-  // It has the name attribute "registration"
   $("form[name='registration']").validate({
-    // Specify validation rules
     rules: {
       name: {
         required: true,
@@ -53,6 +78,42 @@ $(function() {
         minlength: "Your password must be at least 6 characters long"
       },
       email: "Please enter a valid email address"
+    },
+    onkeyup: function() {
+      if($("form[name='registration']").valid()){
+        $('#signupbtn').removeAttr("disabled");
+      } else {
+        $('#signupbtn').attr("disabled",true);
+      }
+    },
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+  $("form[name='loginForm']").validate({
+    rules: {
+      loginemail: {
+        required: true,
+        email: true
+      },
+      loginpassword: {
+        required: true,
+        minlength: 6
+      }
+    },
+    messages: {
+      loginpassword: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 6 characters long"
+      },
+      loginemail: "Please enter a valid email address"
+    },
+    onkeyup: function() {
+      if($("form[name='loginForm']").valid()){
+        $('#loginbtn').removeAttr("disabled");
+      } else {
+        $('#loginbtn').attr("disabled",true);
+      }
     },
     submitHandler: function(form) {
       form.submit();

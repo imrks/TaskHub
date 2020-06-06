@@ -30,7 +30,13 @@ public class CustomerService {
 	
 	public Customer FindUserbyEmail(String email) {
 		// TODO Auto-generated method stub
+		try {
 		return custRepo.findCustomerByEmail(email);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
 	}
 	
 	public void signUp(Customer customer) {
@@ -59,14 +65,21 @@ public class CustomerService {
 
 	public void AddTask(Tasks task, long customer_id, long status_id, long label_id) {
 		// TODO Auto-generated method stub
+		try {
 		task.getLabel().setId(label_id);
 		task.getStatus().setId(status_id);
 		task.getCustomer().setId(customer_id);
 		taskRepo.save(task);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
 	}
 
 	public void EditTask(Tasks task, long id) {
 		// TODO Auto-generated method stub
+		try {
 		Tasks task1 = taskRepo.findById(id);
 		Status status = statusRepo.findStatusById(task.getStatus().getId());
 		Label label = labelRepo.findLabelById(task.getLabel().getId());
@@ -75,16 +88,47 @@ public class CustomerService {
 		task1.setTask_desc(task.getTask_desc());
 		task1.setStatus(status);
 		task1.setLabel(label);
+		if(task.getStatus().getId() == 3)
+		{
+			task1.setArchiveStatus(true);
+		}
 		
 		taskRepo.save(task1);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
+	}
+	public void deleteTask(long id)
+	{
+		try {
+		taskRepo.deleteById(id);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
 	}
 
 	public List<Label> GetLabel() {
 		// TODO Auto-generated method stub
+		try {
 		return labelRepo.findAll();
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
 	}
 	public List<Status> GetStatus()
 	{
+		try {
 		return statusRepo.findAll();
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
 	}
 }

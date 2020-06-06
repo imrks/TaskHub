@@ -28,11 +28,11 @@ public class TaskController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping(value="/home/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> myTasks(@PathVariable long id)
+	@RequestMapping(value="/gettask/{customer_id}", method = RequestMethod.GET)
+	public ResponseEntity<?> myTasks(@PathVariable long customer_id)
 	{
 		try {
-		List<Tasks> task=customerService.myTaskLists(id);
+		List<Tasks> task=customerService.myTaskLists(customer_id);
 		return new ResponseEntity<List<Tasks>>(task, HttpStatus.OK);
 		}
 		catch(Exception e)
@@ -45,8 +45,14 @@ public class TaskController {
 	public ResponseEntity<?> AddTask(@RequestBody Tasks task, @PathVariable long customer_id, @PathVariable long status_id, @PathVariable long label_id)
 	{
 		try {
+			if(status_id == 3)
+			{
+				return new ResponseEntity<>("status cannot be complete", HttpStatus.NOT_ACCEPTABLE);
+			}
+			else {	
 			customerService.AddTask(task,customer_id,status_id,label_id);
 			return new ResponseEntity<>("success", HttpStatus.OK);
+			}
 		}
 		catch(Exception e)
 		{
@@ -87,5 +93,18 @@ public class TaskController {
 			throw new SignUpException("Failure");		
 			}
 	
+	}
+	@RequestMapping(value="/deletetask/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> DeleteTask(@PathVariable long id)
+	{
+		try {
+		customerService.deleteTask(id);
+		return new ResponseEntity<>("Deleted successfully", HttpStatus.ACCEPTED);
+		}
+		catch(Exception e)
+		{
+			throw new SignUpException("Failure");		
+			}
+		
 	}
 }

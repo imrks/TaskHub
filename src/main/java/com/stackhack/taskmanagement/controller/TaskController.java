@@ -91,7 +91,7 @@ public class TaskController {
 		catch(Exception e)
 		{
 			throw new SignUpException("Failure");		
-			}
+		}
 	
 	}
 	@RequestMapping(value="/deletetask/{id}", method = RequestMethod.DELETE)
@@ -104,7 +104,7 @@ public class TaskController {
 		catch(Exception e)
 		{
 			throw new SignUpException("Failure");		
-			}
+		}
 		
 	}
 }

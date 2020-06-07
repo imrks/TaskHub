@@ -3,14 +3,13 @@ var alldata;
 var geditdata;
 function setCid(){
     cid=localStorage.getItem("gid");
-    console.log(cid);
 }
 
 function myTasks(taskname)
 { 
   var flag;
 var getTasksReq = new XMLHttpRequest();
-var url = 'http://localhost:8080/home/'+cid;
+var url = 'http://localhost:8080/gettask/'+cid;
 getTasksReq.open('GET', url);
 getTasksReq.onload = function () {
   if(getTasksReq.status==200){
@@ -80,7 +79,6 @@ function EditTask(editdata)
 var editTaskRequest = new XMLHttpRequest();
 var statusId = document.getElementById("getStatusListEdit").value;
 var taskDesc = document.getElementById("editTaskDesc").value;
-var dueDate = document.getElementById("editTaskDueDate").value;
 var editTaskurl = 'http://localhost:8080/edittask/'+editdata.id;
 editTaskRequest.open('PUT', editTaskurl);
 editTaskRequest.setRequestHeader("Content-Type", "application/json");
@@ -105,6 +103,22 @@ editTaskRequest.onload = function () {
   }
 };
 editTaskRequest.send(editTaskData1);
+}
+
+function DeleteTask(deletedata)
+{ 
+var deleteTaskRequest = new XMLHttpRequest();
+var deleteTaskurl = 'http://localhost:8080/deletetask/'+deletedata.id;
+deleteTaskRequest.open('DELETE', deleteTaskurl);
+deleteTaskRequest.onload = function () {
+  if(deleteTaskRequest.status==202){
+    document.getElementById("editTaskMessage").innerHTML='<p style="color:green;text-align:center;">Task Deleted Successfully<\p>';
+  }
+  else{
+    document.getElementById("editTaskMessage").innerHTML='<p style="color:red;text-align:center;">Something went wrong<\p>';
+  }
+};
+deleteTaskRequest.send();
 }
 
 function renderArchiveTask(data){
@@ -158,6 +172,7 @@ getstatus.onload = function () {
     }
     if(sid==1){
       document.getElementById("getStatusListAdd").innerHTML=getStatusHtml;
+      document.getElementById("filterStatus").innerHTML=getStatusHtml;
     }
     else if(sid==2){
       document.getElementById("getStatusListEdit").innerHTML=getStatusHtml;
@@ -183,6 +198,7 @@ getlabel.onload = function () {
       getLabelHtml=getLabelHtml + '<option value="'+allLabelData[i].id+'">'+allLabelData[i].label+'</option>';
     }
       document.getElementById("getLabelListAdd").innerHTML=getLabelHtml;
+      document.getElementById("filterLabel").innerHTML=getLabelHtml;
   }
   else{
     document.getElementById("getLabelList").innerHTML='<p style="color:red;text-align:center;">Something went wrong<\p>';
@@ -217,6 +233,26 @@ addTaskRequest.onload = function () {
   }
 };
 addTaskRequest.send(addTaskData1);
+}
+
+function Filter(){
+  var fStatus=document.getElementById('filterStatus').value;
+  if(fStatus==''){
+    fStatus=0;
+  }
+  var fLabel=document.getElementById('filterLabel').value;
+  if(fLabel==''){
+    fLabel=0;
+  }
+  var fDate = new Date(document.getElementById('filterDate').value);
+  var dt = fDate.getDate();
+  var mn = fDate.getMonth();
+  mn++;
+  var yy = fDate.getFullYear();
+  var finalDate = yy+"-"+mn+"-"+dt;
+  console.log(finalDate);
+  console.log(fLabel);
+  console.log(fStatus);
 }
 
 function Logout(){

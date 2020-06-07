@@ -17,7 +17,7 @@
                  }
              </script>
     </head>
-    <body onload="setCid(); myTasks('all');">
+    <body onload="setCid(); myTasks('all'); getStatus(1); getLabel();">
          <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -97,6 +97,17 @@
                 vertical-align: top;">Current Task</button>
             </div>
             <br><br><br>
+            <div style="display: inline-block;vertical-align: top;">
+                <input type="text" id="filterDate" class="form-control" onfocus="(this.type='date')" placeholder="Due Date"></input>
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <select id="filterStatus" class="form-control"></select>
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <select id="filterLabel" class="form-control"></select>
+            </div>
+            <button type="button" onclick="Filter()" class="btn btn-primary center-block" style="display: inline-block;vertical-align: top;" >Filter</button>
+            <br><br>
         </div>
         <div class="row text-center">
            <div id="myTaskPage"></div>
@@ -130,6 +141,7 @@
                         <div id="editTaskMessage"></div>
                         <center>
                             <button id="editTaskBtn" class="btn btn-primary" onclick="EditTask(geditdata)">Edit Task</button>
+                            <button id="deleteTaskBtn" class="btn btn-primary" onclick="DeleteTask(geditdata)">Delete Task</button>
                         </center>
                         </div>
                             </div>

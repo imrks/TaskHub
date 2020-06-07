@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <!--jQuery library--> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!--Latest compiled and minified JavaScript--> 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+             <title>TaskHub</title>
+             <link rel="stylesheet" type="text/css" href="style.css">
+             <script src="mylistPage.js"></script>
+             <script>
+                 if(localStorage.getItem("gid")==0){
+                     window.location='index.html';
+                 }
+             </script>
+    </head>
+    <body onload="setCid(); myTasks('all'); getStatus(1); getLabel();">
+         <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="mylist.html">TaskHub</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a onclick="Logout();"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div id="nav_blank">
+                <div class="jumbotron" style="background-image: url(img/jumbo1.png)">
+                    <p><br><br><br><br><br></p>
+                </div>
+            </div>
+        <div class="row text-center">
+            <div class="col-sm-12 text-center">
+                <button type="button" class="btn btn-primary center-block"  data-toggle="modal" 
+                data-target="#addTaskModal" style="display: inline-block;
+                vertical-align: top;" onclick="getStatus(1); getLabel();">Add Task</button>
+                <!-- Add Task Modal -->
+					<div class="modal fade" id="addTaskModal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                             <div class="panel panel-primary">
+                        <div class="text-warning">
+                            <h2>ADD TASK</h2>
+                        </div>
+                        <form name="addTaskForm" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="addTaskDesc" id="addTaskDesc"  placeholder="Add Task Description" >
+                            </div>
+                            <div class="form-group">
+                                <select id="getLabelListAdd" class="form-control" name="addTaskLabel" id="addTaskLabel">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select id="getStatusListAdd" class="form-control" name="addTaskStatus" id="addTaskStatus">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  class="form-control" id="addTaskDueDate" name="addTaskDueDate"  placeholder="Due Date(YYYY-MM-DD)" >
+                            </div>
+                        </form>
+                        <div id="addTaskMessage"></div>
+                        <center>
+                            <button id="addTaskBtn" disabled="true" class="btn btn-primary" onclick="AddTask()">Add Task</button>
+                        </center>
+                        </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                        <script>
+                            $('#addTaskModal').on('hidden.bs.modal', function(e){window.location.reload();});
+                            </script>
+                        </div>  
+                <button type="button" class="btn btn-primary center-block" style="display: inline-block;
+                vertical-align: top;" onclick="myTasks('archive');">Archived Task</button>
+                <button type="button" class="btn btn-primary center-block" onclick="location.href='mylist.html'" style="display: inline-block;
+                vertical-align: top;">Current Task</button>
+            </div>
+            <br><br><br>
+            <div id="filtering">
+            <div style="display: inline-block;vertical-align: top;">
+                <input type="text" id="filterDate" class="form-control" onfocus="(this.type='date')" placeholder="Due Date"></input>
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <select id="filterStatus" class="form-control"></select>
+            </div>
+            <div style="display: inline-block;vertical-align: top;">
+                <select id="filterLabel" class="form-control"></select>
+            </div>
+            <button type="button" onclick="Filter()" class="btn btn-primary center-block" style="display: inline-block;vertical-align: top;" >Filter</button>
+            <br><br>
+            </div>
+        </div>
+        <div class="row text-center">
+           <div id="myTaskPage"></div>
+           <!-- Edit Task Modal -->
+					<div class="modal fade" id="editTaskModal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                             <div class="panel panel-primary">
+                        <div class="text-warning">
+                            <h2>EDIT TASK</h2>
+                        </div>
+                        <form name="editTaskForm" method="POST">
+                            <div class="form-group">
+                                <input type="text" disabled="true" class="form-control" name="addTaskDesc" id="editTaskDesc"  placeholder="Add Task Description" >
+                            </div>
+                            <div class="form-group">
+                                <input type="text" disabled="true" class="form-control" name="editTaskLabel" id="editTaskLabel"  placeholder="Label" >
+                            </div>
+                            <div class="form-group">
+                                <select id="getStatusListEdit" onchange="enableEditBtn()" class="form-control" name="editTaskStatus" id="editTaskStatus">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text"  disabled="true" class="form-control" id="editTaskDueDate" name="editTaskDueDate"  placeholder="Due Date(YYYY-MM-DD)" >
+                            </div>
+                        </form>
+                        <div id="editTaskMessage"></div>
+                        <center>
+                            <button id="editTaskBtn" disabled="true" class="btn btn-primary" onclick="EditTask(geditdata)">Edit Task</button>
+                            <button id="deleteTaskBtn" class="btn btn-primary" onclick="DeleteTask(geditdata)">Delete Task</button>
+                        </center>
+                        </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                        <script>
+                            $('#editTaskModal').on('hidden.bs.modal', function(e){window.location.reload();});
+                            </script>
+                        </div>
+        </div>
+        </div>
+        <br><br><br>
+        <footer style="position:fixed">
+            <div class="container">
+                <center>
+                    <p>Copyright © TaskHub. All Rights
+Reserved | Contact Us: +91 90000 00000</p>
+                </center>
+            </div>
+        </footer>
+    </body>
+</html>

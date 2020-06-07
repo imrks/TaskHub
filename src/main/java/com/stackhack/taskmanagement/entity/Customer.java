@@ -21,17 +21,20 @@ public class Customer {
 	@Size(min=2, message="Name should have atleast 2 characters")
 	@Column(name = "name")
 	private String name;
-	
+
 	@NotEmpty(message="Email should not be empty")
 	@Email(regexp="^(.+)@(.+)$",message="Invalid Email Pattern")
 	@Column(name = "email")
 	private String email;
-	
-	@NotEmpty(message="Email should not be empty")
+
+	@NotEmpty(message="Password should not be empty")
 	@Column(name = "password")
 	@Size(min=6, message="Password should have atleast 6 characters")
 	private String password;
-	
+	public Customer() {
+
+	}
+
 	public Customer(long id, String name, String email, String password) {
 		super();
 		this.id = id;
@@ -39,7 +42,7 @@ public class Customer {
 		this.email = email;
 		this.password = password;
 	}
-	
+
 	public long getId() {
 		return id;
 	}

@@ -1,4 +1,4 @@
-package com.stackhack.taskmanagement.entity;
+	package com.stackhack.taskmanagement.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,13 +34,16 @@ public class Tasks {
 	private boolean overdueStatus;
 	
 	@ManyToOne
-	Status status;
+	Status status = new Status();
 	
 	@ManyToOne
-	Label label;
+	Label label = new Label();
 	
 	@ManyToOne
-	Customer customer;
+	Customer customer = new Customer();
+	public Tasks() {
+		
+	}
 	
 	public Tasks(long id, @NotEmpty(message = "Task Desc should not be empty") String task_desc, Date date,
 			Date dueDate, boolean archiveStatus, boolean overdueStatus, Status status, Label label,

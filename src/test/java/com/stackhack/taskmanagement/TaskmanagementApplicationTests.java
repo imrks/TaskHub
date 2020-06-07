@@ -1,4 +1,4 @@
-package com.stackhack.taskmanagement;
+/*package com.stackhack.taskmanagement;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,3 +10,4 @@ class TaskmanagementApplicationTests {
 	}
 
 }
+*/

@@ -1,8 +1,19 @@
 package com.stackhack.taskmanagement.service;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.stackhack.taskmanagement.entity.Customer;
@@ -50,12 +61,44 @@ public class CustomerService {
 	}
 	
 	
-	public List<Tasks> myTaskLists(long cid) {
+	public List<Tasks> myTaskLists(long cid, Long status_id, Long label_id, Date duedate) {
 		// TODO Auto-generated method stub
-		try {
-			
-				List<Tasks> task = taskRepo.findAllTaskByCustomer_id(cid);
-                return task;
+	try {
+				
+				List<Tasks> task = taskRepo.findAll(
+					 new Specification<Tasks>(){
+
+					@Override
+					public Predicate toPredicate(Root<Tasks> root, CriteriaQuery<?> cq,
+							CriteriaBuilder cb) {
+						// TODO Auto-generated method stub
+						Predicate p = cb.conjunction();
+						p = cb.and(p, cb.equal(root.get("customer"), cid));
+						if(Objects.nonNull(duedate))
+						{
+							System.out.println(duedate);
+								p = cb.and(p, cb.equal(root.get("dueDate"), duedate ));
+							 
+							
+							
+							
+						}
+						
+						if(Objects.nonNull(status_id))
+						{
+							
+							p = cb.and(p, cb.equal(root.get("status"), status_id));
+						}
+						if(Objects.nonNull(label_id))
+						{
+							p = cb.and(p, cb.equal(root.get("label"), label_id));
+						}
+						return p;
+						
+					}
+				});
+				return task;
+		 
 			}
 			catch(Exception e)
 			{

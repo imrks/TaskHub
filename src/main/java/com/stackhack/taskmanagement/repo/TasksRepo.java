@@ -1,14 +1,16 @@
 package com.stackhack.taskmanagement.repo;
 
-import java.util.List;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.stackhack.taskmanagement.entity.Tasks;
 
-public interface TasksRepo extends JpaRepository<Tasks, Long> {
-	public List<Tasks> findAllTaskByCustomer_id(long cid);
+public interface TasksRepo extends JpaRepository<Tasks, Long>, JpaSpecificationExecutor<Tasks> {
 	public Tasks findById(long id);
 	public void deleteById(long id);
+	
+	
 
 }

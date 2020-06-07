@@ -10,7 +10,7 @@ function myTasks(taskname)
 { 
   var flag;
 var getTasksReq = new XMLHttpRequest();
-var url = 'http://localhost:8080/home/'+cid;
+var url = 'http://localhost:8080/gettask/'+cid;
 getTasksReq.open('GET', url);
 getTasksReq.onload = function () {
   if(getTasksReq.status==200){

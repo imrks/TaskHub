@@ -8,7 +8,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-             <title>Task Management</title>
+             <title>TaskHub</title>
              <link rel="stylesheet" type="text/css" href="style.css">
              <script src="mylistPage.js"></script>
              <script>
@@ -26,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="mylist.html">Task Management</a>
+                    <a class="navbar-brand" href="mylist.html">TaskHub</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -37,11 +37,9 @@
         </nav>
         <div class="container">
             <div id="nav_blank">
-            <div class="jumbotron">
-                <h1>Welcome to our Task Management!</h1>
-                <p>We have the best feature, Here you can keep track of your tasks and complete your
-                    To-Do List in time.</p>
-            </div>
+                <div class="jumbotron" style="background-image: url(img/jumbo1.png)">
+                    <p><br><br><br><br><br></p>
+                </div>
             </div>
         <div class="row text-center">
             <div class="col-sm-12 text-center">
@@ -97,6 +95,7 @@
                 vertical-align: top;">Current Task</button>
             </div>
             <br><br><br>
+            <div id="filtering">
             <div style="display: inline-block;vertical-align: top;">
                 <input type="text" id="filterDate" class="form-control" onfocus="(this.type='date')" placeholder="Due Date"></input>
             </div>
@@ -108,6 +107,7 @@
             </div>
             <button type="button" onclick="Filter()" class="btn btn-primary center-block" style="display: inline-block;vertical-align: top;" >Filter</button>
             <br><br>
+            </div>
         </div>
         <div class="row text-center">
            <div id="myTaskPage"></div>
@@ -131,7 +131,7 @@
                                 <input type="text" disabled="true" class="form-control" name="editTaskLabel" id="editTaskLabel"  placeholder="Label" >
                             </div>
                             <div class="form-group">
-                                <select id="getStatusListEdit" class="form-control" name="editTaskStatus" id="editTaskStatus">
+                                <select id="getStatusListEdit" onchange="enableEditBtn()" class="form-control" name="editTaskStatus" id="editTaskStatus">
                                 </select>
                             </div>
                             <div class="form-group">
@@ -140,7 +140,7 @@
                         </form>
                         <div id="editTaskMessage"></div>
                         <center>
-                            <button id="editTaskBtn" class="btn btn-primary" onclick="EditTask(geditdata)">Edit Task</button>
+                            <button id="editTaskBtn" disabled="true" class="btn btn-primary" onclick="EditTask(geditdata)">Edit Task</button>
                             <button id="deleteTaskBtn" class="btn btn-primary" onclick="DeleteTask(geditdata)">Delete Task</button>
                         </center>
                         </div>
@@ -160,7 +160,7 @@
         <footer style="position:fixed">
             <div class="container">
                 <center>
-                    <p>Copyright © Task Management. All Rights
+                    <p>Copyright © TaskHub. All Rights
 Reserved | Contact Us: +91 90000 00000</p>
                 </center>
             </div>

@@ -123,6 +123,7 @@ deleteTaskRequest.send();
 
 function renderArchiveTask(data){
   document.getElementById("myTaskPage").innerHTML='';
+  document.getElementById("filtering").innerHTML='';
   var htmlString='';
   var flag=0;
   for(i=0;i< data.length;i++){
@@ -237,22 +238,36 @@ addTaskRequest.send(addTaskData1);
 
 function Filter(){
   var fStatus=document.getElementById('filterStatus').value;
-  if(fStatus==''){
-    fStatus=0;
-  }
   var fLabel=document.getElementById('filterLabel').value;
-  if(fLabel==''){
-    fLabel=0;
-  }
-  var fDate = new Date(document.getElementById('filterDate').value);
+  var fDate = document.getElementById('filterDate').value;
+  var filterTaskurl = 'http://localhost:8080/gettask/'+cid+'?status_id='+fStatus+'&label_id='+fLabel+'&duedate=';
+  if(fDate!=''){
+  fDate=new Date(fDate);
   var dt = fDate.getDate();
   var mn = fDate.getMonth();
   mn++;
   var yy = fDate.getFullYear();
-  var finalDate = yy+"-"+mn+"-"+dt;
-  console.log(finalDate);
-  console.log(fLabel);
-  console.log(fStatus);
+  var fDate = yy+"-"+mn+"-"+dt+" 05:30:00";
+  filterTaskurl=filterTaskurl+fDate;
+  }
+  var filterTaskRequest = new XMLHttpRequest();
+  filterTaskRequest.open('GET', filterTaskurl);
+  filterTaskRequest.onload = function () {
+  if(filterTaskRequest.status==200){
+    allFilterData=JSON.parse(filterTaskRequest.responseText);
+    document.getElementById("myTaskPage").innerHTML='';
+    if(allFilterData.length>0){
+        flag=renderAllTask(allFilterData);
+    }
+    else{
+      document.getElementById("myTaskPage").innerHTML='<div class="well">No Tasks Found. Go on, Set your Tasks</div>';
+    }
+  }
+  else{
+    document.getElementById("myTaskPage").innerHTML='<p style="color:red;text-align:center;">Something went wrong<\p>';
+  }
+};
+filterTaskRequest.send();
 }
 
 function Logout(){
@@ -308,3 +323,7 @@ $(function() {
     }
   });
 });
+
+function enableEditBtn(){
+  document.getElementById('editTaskBtn').removeAttribute("disabled");
+}

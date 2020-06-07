@@ -5,14 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.stackhack.taskmanagement.exception.SignUpException;
+import com.stackhack.taskmanagement.exception.AllException;
 import com.stackhack.taskmanagement.response.Response;
 
 @RestControllerAdvice
-public class SignUpExceptionHandler {
+public class AllExceptionHandler {
 	
-	@ExceptionHandler({SignUpException.class})
-    public ResponseEntity<Response> notFound(SignUpException ex){
+	@ExceptionHandler({AllException.class})
+    public ResponseEntity<Response> notFound(AllException ex){
         return new ResponseEntity<Response>(
             new Response(ex.getMessage(), 404) , HttpStatus.NOT_FOUND);
     }
